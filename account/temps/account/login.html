@@ -1,0 +1,43 @@
+{% extends 'account/base.html' %}
+{% block title %} Authentication  {% endblock %}
+{% block body %}
+
+
+<div class="container my-5">
+      <b><h1 style="color:#007bff">Log In</h1></b><br>
+      <p style="color:red">{{ error }}</p><br>
+
+      <form method="post" action="{% url 'login' %}">
+
+        {% csrf_token %}<!-- ye hackers se safety ke liye python ka built code hota hai -->
+
+        <div class="form-group">
+          <label for="exampleInputEmail1">Username</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"    name="username" placeholder="Enter username or email" style=" width: 20% ">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your account with anyone else.</small>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder=" Enter Password" style=" width: 20% ">
+        </div>
+
+        <div class="container my-5 ">
+          <input type="submit" class="btn btn-primary" value="Log In">
+        </div>
+
+        <div class="container-fluid" style="cursor:pointer">
+        <a href="{% url 'signup' %}">  <h4 >Create a new Account</h4>
+        </div>
+
+      </form>
+    </div><br>
+
+
+
+
+
+
+
+
+{% endblock %}
