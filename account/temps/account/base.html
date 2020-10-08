@@ -22,11 +22,23 @@
 
         <div class="collapse navbar-collapse" id="ftco-nav">
           <ul class="container navbar-nav mr-auto mx-5 col-md-4" style="font-weight: 500">
-            <li class="nav-item " ><a href="{% url 'home' %}" class="nav-link pl-0">HOME</a></li>
+            <li class="nav-item {% if request.resolver_match.url_name == 'home' %}
+            			active {% endif %}" ><a href="{% url 'home' %}" class="nav-link pl-0">HOME</a></li>
+            {% if user.is_authenticated %}
+              <li><a class="nav-item nav-link {% if request.resolver_match.url_name == 'data' %}
+            			active {% endif %}" href="{% url 'data'%}" >View Data</a></li>
+            <li><a class="nav-item nav-link " href="javascript:{document.getElementById('logout').submit()}" >Log Out</a></li>
+            <form id="logout" method="POST" action="{% url 'logout'%}">
+               {% csrf_token %}
+              <input type="hidden">
+            </form>
+            {% else %}
+            <li class="nav-item {% if request.resolver_match.url_name == 'login' %}
+                active {% endif %}"><a href="{% url 'login' %}" class="nav-link">Log In</a></li>
 
-            <li class="nav-item "><a href="{% url 'login' %}" class="nav-link">Log In</a></li>
-
-            <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link">Sign Up</a></li>
+            <li class="nav-item {% if request.resolver_match.url_name == 'signup' %}
+                active {% endif %}"><a href="{% url 'signup' %}" class="nav-link">Sign Up</a></li>
+            {% endif %}
 
           </ul>
         </div>

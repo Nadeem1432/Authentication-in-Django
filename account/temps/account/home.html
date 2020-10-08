@@ -2,6 +2,16 @@
 
 
 {% block body %}
-<h1>please login or signup </h1>
+<div class="container">
+<div class="jumbotron">
+  {% if user.is_authenticated %}
+  {% csrf_token %}
+  <h1 class="display-4">Successfully Login...</h1>
+  {% else %}
+  <h1 class="display-4">required login or signup!</h1>
+  {% endif %}
+</div>
+</div>
+
 
 {% endblock %}
